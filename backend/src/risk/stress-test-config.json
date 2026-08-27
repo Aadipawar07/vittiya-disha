@@ -1,0 +1,69 @@
+{
+  "rulesVersion": "2026.08",
+  "scenarios": [
+    {
+      "key": "OPTIMISTIC",
+      "label": "Optimistic (+20%)",
+      "incomeAdjustment": 0.20,
+      "description": "Stronger than expected customer adoption and above-average trading volumes."
+    },
+    {
+      "key": "EXPECTED",
+      "label": "Expected (Baseline)",
+      "incomeAdjustment": 0.00,
+      "description": "Base business operations meeting planned revenue targets."
+    },
+    {
+      "key": "CONSERVATIVE",
+      "label": "Conservative (-20%)",
+      "incomeAdjustment": -0.20,
+      "description": "Subdued initial demand, local seasonal slump, or delayed customer traction."
+    },
+    {
+      "key": "SEVERE",
+      "label": "Severe (-40%)",
+      "incomeAdjustment": -0.40,
+      "description": "Prolonged adverse shock, aggressive new competitor entry, or economic headwinds."
+    }
+  ],
+  "verdictThresholds": [
+    {
+      "maxRatio": 0.30,
+      "verdict": "COMFORTABLE",
+      "label": "Comfortable",
+      "color": "go",
+      "description": "Repayment obligations consume less than 30% of monthly income, leaving ample buffer for operating expenses and savings."
+    },
+    {
+      "maxRatio": 0.40,
+      "verdict": "MANAGEABLE",
+      "label": "Manageable",
+      "color": "gold",
+      "description": "Repayment consumes 30%–40% of income. Obligations are manageable with prudent monthly cash-flow discipline."
+    },
+    {
+      "maxRatio": 0.50,
+      "verdict": "TIGHT",
+      "label": "Tight — Build Buffer",
+      "color": "saffron",
+      "description": "Repayment consumes 40%–50% of income. Financial cushion is slim; consider maintaining an emergency cash buffer."
+    },
+    {
+      "maxRatio": 999.0,
+      "verdict": "HIGH_RISK",
+      "label": "High Risk — Reconsider Structure",
+      "color": "maroon",
+      "description": "Repayment consumes 50%+ of income. Severe vulnerability to default under revenue shortfalls; restructuring recommended."
+    }
+  ],
+  "targetComfortRatio": 0.30,
+  "recommendations": {
+    "tightScenario": "Consider keeping a larger operating liquidity buffer (at least 3 months of EMI) or reducing the initial borrowing requirement.",
+    "severeHighRisk": "Your repayment burden becomes high under a severe income decline. Consider reducing the loan amount, increasing your own contribution, or securing a longer repayment tenure.",
+    "comfortable": "Repayment burden remains within comfortable limits across tested operating scenarios."
+  },
+  "disclaimers": {
+    "mathematicalSimulation": "Stress scenarios are illustrative mathematical simulations based on the income figure provided. They do not guarantee actual business revenue or loan repayment outcomes.",
+    "incomeLimitation": "Stress testing uses the income figure provided and does not account for unreported operating expenses or household overheads."
+  }
+}

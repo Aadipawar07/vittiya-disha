@@ -33,6 +33,10 @@ vi.mock('../../../services/feasibilityApi.js', () => ({
   getFeasibilityAnalysis: vi.fn()
 }))
 
+vi.mock('../../market/MarketMap.jsx', () => ({
+  default: () => <div data-testid="mock-market-map">Market Map</div>
+}))
+
 import { getFeasibilityAnalysis } from '../../../services/feasibilityApi.js'
 
 // ── Shared mock data ──────────────────────────────────────────────────────────

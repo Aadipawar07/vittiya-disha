@@ -1,0 +1,296 @@
+{
+  "dairy": {
+    "displayName": "Dairy Enterprise",
+    "seasonalDemand": {
+      "enabled": true,
+      "severity": "MEDIUM",
+      "reason": "Milk yields and consumer demand vary between summer lean periods and winter flush cycles.",
+      "mitigation": "Establish silage/fodder reserves for summer months and diversify into value-added products like ghee or paneer."
+    },
+    "singleBuyerDependency": {
+      "inherentlyExposed": true,
+      "defaultSeverity": "MEDIUM",
+      "reason": "Dairy micro-units frequently route bulk daily output to a single village cooperative or private chilling center.",
+      "mitigation": "Explore local retail sales, institutional direct tie-ups (hotels/tea stalls), and multiple off-take channels."
+    },
+    "supplyChainFragility": {
+      "enabled": true,
+      "severity": "HIGH",
+      "reason": "Raw milk is highly perishable requiring immediate cold-chain cooling or twice-daily collection logistics.",
+      "mitigation": "Ensure reliable backup chilling/power options and prompt morning/evening delivery schedules."
+    }
+  },
+  "grocery_shop": {
+    "displayName": "Grocery Shop / Kirana",
+    "seasonalDemand": {
+      "enabled": false,
+      "severity": "LOW",
+      "reason": "Daily essential staples experience stable demand across seasons.",
+      "mitigation": "Maintain standard stock reorder levels based on regular fast-moving inventory cycles."
+    },
+    "singleBuyerDependency": {
+      "inherentlyExposed": false,
+      "defaultSeverity": "LOW",
+      "reason": "Customer base is distributed across numerous local households and walk-in consumers.",
+      "mitigation": "Avoid offering high unsecured customer credit (khata) to single families."
+    },
+    "supplyChainFragility": {
+      "enabled": false,
+      "severity": "LOW",
+      "reason": "Packaged goods and dry grains have long shelf lives with accessible district wholesale supply.",
+      "mitigation": "Maintain active relationships with at least 2 wholesale distributors in the nearest mandi/market."
+    }
+  },
+  "tailoring": {
+    "displayName": "Tailoring & Garment Workshop",
+    "seasonalDemand": {
+      "enabled": true,
+      "severity": "MEDIUM",
+      "reason": "Peak demand concentrates around wedding seasons, festivals (Diwali/Eid), and school reopening terms.",
+      "mitigation": "Offer uniform contracting and routine alterations/repairs during off-peak months to stabilize baseline revenue."
+    },
+    "singleBuyerDependency": {
+      "inherentlyExposed": false,
+      "defaultSeverity": "LOW",
+      "reason": "Revenue is typically spread across individual walk-in stitching clients.",
+      "mitigation": "Balance individual retail stitching with bulk institutional orders (schools/hospitals)."
+    },
+    "supplyChainFragility": {
+      "enabled": false,
+      "severity": "LOW",
+      "reason": "Fabrics and sewing accessories are non-perishable with standard market availability.",
+      "mitigation": "Stock essential threads, zippers, and standard lining fabrics in advance of festival rushes."
+    }
+  },
+  "salon": {
+    "displayName": "Salon & Personal Care",
+    "seasonalDemand": {
+      "enabled": false,
+      "severity": "LOW",
+      "reason": "Routine grooming and hygiene services follow regular weekly/monthly customer visits.",
+      "mitigation": "Introduce bridal/festive grooming packages during wedding seasons for revenue surges."
+    },
+    "singleBuyerDependency": {
+      "inherentlyExposed": false,
+      "defaultSeverity": "LOW",
+      "reason": "Client base comprises a wide pool of individual local residents.",
+      "mitigation": "Build customer loyalty programs and consistent operating hours."
+    },
+    "supplyChainFragility": {
+      "enabled": false,
+      "severity": "LOW",
+      "reason": "Cosmetic products and personal care equipment have stable shelf lives.",
+      "mitigation": "Procure genuine branded products through authorized regional distributors."
+    }
+  },
+  "restaurant": {
+    "displayName": "Restaurant / Food Eatery",
+    "seasonalDemand": {
+      "enabled": false,
+      "severity": "LOW",
+      "reason": "Food consumption is daily and consistent throughout the year.",
+      "mitigation": "Adjust menu offerings seasonally (e.g. cooling beverages in summer, hot snacks in winter)."
+    },
+    "singleBuyerDependency": {
+      "inherentlyExposed": false,
+      "defaultSeverity": "LOW",
+      "reason": "Revenue is generated from diversified daily retail footfalls.",
+      "mitigation": "Avoid relying solely on a single office/institution for catering orders."
+    },
+    "supplyChainFragility": {
+      "enabled": true,
+      "severity": "HIGH",
+      "reason": "Fresh ingredients (vegetables, dairy, meats) are perishable and subject to daily price volatility.",
+      "mitigation": "Implement disciplined daily inventory control and maintain clean cold storage facilities."
+    }
+  },
+  "workshop": {
+    "displayName": "Repair Workshop & Fabrication",
+    "seasonalDemand": {
+      "enabled": true,
+      "severity": "LOW",
+      "reason": "Agricultural equipment and pump repairs peak around sowing and harvesting seasons.",
+      "mitigation": "Diversify into two-wheeler repairs, welding fabrication, and general household mechanical servicing."
+    },
+    "singleBuyerDependency": {
+      "inherentlyExposed": false,
+      "defaultSeverity": "LOW",
+      "reason": "Servicing is spread across individual vehicle and equipment owners.",
+      "mitigation": "Partner with local transport operators and agricultural equipment dealers for steady repair inflow."
+    },
+    "supplyChainFragility": {
+      "enabled": false,
+      "severity": "LOW",
+      "reason": "Spare parts and metal raw materials are durable.",
+      "mitigation": "Maintain critical fast-moving spare parts (bearings, belts, filters) in workshop inventory."
+    }
+  },
+  "manufacturing": {
+    "displayName": "Small Manufacturing Unit",
+    "seasonalDemand": {
+      "enabled": false,
+      "severity": "LOW",
+      "reason": "Manufacturing output runs year-round based on contractual or market orders.",
+      "mitigation": "Maintain a rolling 3-month production schedule aligned with distribution commitments."
+    },
+    "singleBuyerDependency": {
+      "inherentlyExposed": true,
+      "defaultSeverity": "HIGH",
+      "reason": "Small manufacturing units often rely on 1 or 2 large institutional B2B buyers or OEM contracts.",
+      "mitigation": "Actively onboard multiple wholesale buyers and establish formal supply agreements."
+    },
+    "supplyChainFragility": {
+      "enabled": true,
+      "severity": "MEDIUM",
+      "reason": "Production schedules depend on uninterrupted raw material deliveries and machinery spares.",
+      "mitigation": "Source raw materials from at least two distinct suppliers and maintain a 30-day raw material buffer."
+    }
+  },
+  "poultry": {
+    "displayName": "Poultry Farm",
+    "seasonalDemand": {
+      "enabled": true,
+      "severity": "MEDIUM",
+      "reason": "Egg and broiler demand fluctuates with religious fasting periods and summer temperature stress.",
+      "mitigation": "Adopt climate-controlled shed ventilation and schedule batch placements around peak festive demand."
+    },
+    "singleBuyerDependency": {
+      "inherentlyExposed": true,
+      "defaultSeverity": "MEDIUM",
+      "reason": "Integration contract models often bind farms to a single integrator company.",
+      "mitigation": "Verify contract integrator payout stability or maintain independent local live-bird retail linkages."
+    },
+    "supplyChainFragility": {
+      "enabled": true,
+      "severity": "HIGH",
+      "reason": "Live birds require daily feed, biosecurity medications, and timely farm-gate collection.",
+      "mitigation": "Maintain strict biosecurity protocols, vaccine schedules, and guaranteed feed supply lines."
+    }
+  },
+  "retail": {
+    "displayName": "Retail Enterprise",
+    "seasonalDemand": {
+      "enabled": false,
+      "severity": "LOW",
+      "reason": "General retail sees recurring year-round demand with festival spikes.",
+      "mitigation": "Plan festive working capital expansion 6 weeks before major festivals."
+    },
+    "singleBuyerDependency": {
+      "inherentlyExposed": false,
+      "defaultSeverity": "LOW",
+      "reason": "Consumer footfall is widely distributed across the neighborhood.",
+      "mitigation": "Maintain diverse product categories matching local consumer preferences."
+    },
+    "supplyChainFragility": {
+      "enabled": false,
+      "severity": "LOW",
+      "reason": "General merchandise has standard shelf life.",
+      "mitigation": "Order directly from authorized wholesalers to preserve margins."
+    }
+  },
+  "transport": {
+    "displayName": "Transport / Logistics Service",
+    "seasonalDemand": {
+      "enabled": true,
+      "severity": "MEDIUM",
+      "reason": "Agricultural freight demand follows harvest seasons and monsoon road conditions.",
+      "mitigation": "Contract with non-agricultural commercial goods and passenger transport during off-season months."
+    },
+    "singleBuyerDependency": {
+      "inherentlyExposed": true,
+      "defaultSeverity": "MEDIUM",
+      "reason": "Single vehicle operators often depend on one transport broker or factory contract.",
+      "mitigation": "Register with multiple logistics aggregators, local mandis, and local wholesale traders."
+    },
+    "supplyChainFragility": {
+      "enabled": false,
+      "severity": "LOW",
+      "reason": "Service-based business with vehicle maintenance as primary operating input.",
+      "mitigation": "Follow strict periodic vehicle maintenance and maintain commercial insurance coverage."
+    }
+  },
+  "service_business": {
+    "displayName": "General Service Business",
+    "seasonalDemand": {
+      "enabled": false,
+      "severity": "LOW",
+      "reason": "General service businesses operate continuously throughout the year.",
+      "mitigation": "Maintain active local business listings and word-of-mouth referral incentives."
+    },
+    "singleBuyerDependency": {
+      "inherentlyExposed": false,
+      "defaultSeverity": "LOW",
+      "reason": "Customer base is spread across individual service clients.",
+      "mitigation": "Maintain high service turnaround and clear transparent pricing."
+    },
+    "supplyChainFragility": {
+      "enabled": false,
+      "severity": "LOW",
+      "reason": "Low inventory dependency.",
+      "mitigation": "Maintain reliable tools and equipment with backup instruments."
+    }
+  },
+  "sanitation_enterprise": {
+    "displayName": "Sanitation & Waste Management Enterprise",
+    "seasonalDemand": {
+      "enabled": false,
+      "severity": "LOW",
+      "reason": "Daily sanitation, waste recycling, and cleaning needs are continuous year-round.",
+      "mitigation": "Contract for both residential and commercial sanitation management."
+    },
+    "singleBuyerDependency": {
+      "inherentlyExposed": true,
+      "defaultSeverity": "MEDIUM",
+      "reason": "Revenue frequently depends on municipal contracts, ward committees, or bulk commercial complexes.",
+      "mitigation": "Diversify between government municipal tenders and private residential/commercial collection contracts."
+    },
+    "supplyChainFragility": {
+      "enabled": false,
+      "severity": "LOW",
+      "reason": "Operational inputs focus on mechanized cleaning equipment, safety gear, and disposal transport.",
+      "mitigation": "Maintain strict safety equipment standards and regular vehicle servicing."
+    }
+  },
+  "green_business": {
+    "displayName": "Green Energy / Eco-Friendly Enterprise",
+    "seasonalDemand": {
+      "enabled": true,
+      "severity": "LOW",
+      "reason": "Solar installation and biomass processing may experience minor monsoon dips.",
+      "mitigation": "Combine equipment installation with annual maintenance contracts (AMC) for steady cash flow."
+    },
+    "singleBuyerDependency": {
+      "inherentlyExposed": false,
+      "defaultSeverity": "LOW",
+      "reason": "Customer base covers residential rooftop solar, agricultural pumps, and small commercial units.",
+      "mitigation": "Leverage government subsidy channels to market directly to diverse agricultural and rural households."
+    },
+    "supplyChainFragility": {
+      "enabled": true,
+      "severity": "MEDIUM",
+      "reason": "Dependence on regional solar inverter, panel, or biomass equipment distributors.",
+      "mitigation": "Partner with Tier-1 certified equipment manufacturers with active regional service centers."
+    }
+  },
+  "default": {
+    "displayName": "Micro Enterprise",
+    "seasonalDemand": {
+      "enabled": false,
+      "severity": "LOW",
+      "reason": "Standard micro-enterprise operations with consistent demand profile.",
+      "mitigation": "Monitor monthly sales trends and adjust stock levels proactively."
+    },
+    "singleBuyerDependency": {
+      "inherentlyExposed": false,
+      "defaultSeverity": "LOW",
+      "reason": "Revenue is distributed across multiple local customers.",
+      "mitigation": "Maintain a broad customer base and avoid credit concentration."
+    },
+    "supplyChainFragility": {
+      "enabled": false,
+      "severity": "LOW",
+      "reason": "Standard non-perishable commercial inventory.",
+      "mitigation": "Maintain reliable supply lines from multiple regional wholesalers."
+    }
+  }
+}

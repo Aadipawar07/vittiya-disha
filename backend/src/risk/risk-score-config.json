@@ -1,0 +1,28 @@
+{
+  "rulesVersion": "2026.08",
+  "baseScore": 95,
+  "minScore": 15,
+  "maxScore": 95,
+  "severityPenalties": {
+    "LOW": 10,
+    "MEDIUM": 20,
+    "HIGH": 35,
+    "CRITICAL": 55
+  },
+  "riskLevelThresholds": {
+    "LOW": { "minScore": 80, "label": "Low Risk", "description": "Favorable risk profile with minimal operational or market vulnerabilities." },
+    "MEDIUM": { "minScore": 60, "label": "Moderate Risk", "description": "Standard business risks present that can be managed with basic operational buffers." },
+    "HIGH": { "minScore": 40, "label": "High Risk", "description": "Significant category or market risks identified requiring active risk mitigation." },
+    "CRITICAL": { "minScore": 0, "label": "Critical Risk", "description": "Multiple compounded high-severity risks requiring fundamental restructuring before launch." }
+  },
+  "competitionRiskThresholds": {
+    "highCompetitionScoreBelow": 40,
+    "moderateCompetitionScoreBelow": 60,
+    "highSeverity": "HIGH",
+    "moderateSeverity": "MEDIUM",
+    "highReason": "Local area exhibits high competitor concentration, increasing pricing pressure and customer acquisition challenges.",
+    "moderateReason": "Moderate competitor presence in analysis radius requiring clear service differentiation.",
+    "highMitigation": "Differentiate through specialized merchandise, extended operating hours, loyalty perks, home delivery, or digital payments.",
+    "moderateMitigation": "Focus on high-quality customer service, reliable inventory availability, and competitive pricing."
+  }
+}

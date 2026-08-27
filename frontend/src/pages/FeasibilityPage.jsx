@@ -32,6 +32,8 @@ import PopulationCard from '../components/market/PopulationCard.jsx'
 import DemandCalculationCard from '../components/market/DemandCalculationCard.jsx'
 import AlternativeBusinesses from '../components/market/AlternativeBusinesses.jsx'
 import ActionableImprovements from '../components/market/ActionableImprovements.jsx'
+import RepaymentStressTest from '../components/stress/RepaymentStressTest.jsx'
+import RiskSection from '../components/risk/RiskSection.jsx'
 
 // ─── Loading messages — cycle through these during analysis ─────────────────
 const LOADING_MESSAGES = [
@@ -350,7 +352,12 @@ export default function FeasibilityPage() {
       financial: {
         projectRequirement: Number(financial.requestedAmount ?? assessmentFinancial?.requestedLoan ?? 0),
         eligibleLoan: Number(assessmentFinancial?.eligible_loan ?? assessmentFinancial?.eligibleLoan ?? 0),
-        ownContribution: Number(financial.ownContribution ?? 0)
+        ownContribution: Number(financial.ownContribution ?? 0),
+        expectedMonthlyIncome: Number(financial.expectedMonthlyIncome ?? 0),
+        singleBuyerDependency: financial.singleBuyerDependency ?? null
+      },
+      userInputs: {
+        singleBuyerDependency: financial.singleBuyerDependency ?? null
       },
       execution: {
         experience: execution.experience ?? null,
@@ -541,6 +548,35 @@ export default function FeasibilityPage() {
             {result.market.improvements && result.market.improvements.length > 0 && (
               <ActionableImprovements improvements={result.market.improvements} />
             )}
+          </div>
+        )}
+
+        {/* ── REPAYMENT STRESS TEST ────────────────────────────────────────── */}
+        {result.repaymentStress && (
+          <div className="mt-10">
+            <RepaymentStressTest
+              repaymentStress={result.repaymentStress}
+              financialContext={result.components?.financialFit?.details}
+            />
+          </div>
+        )}
+
+        {/* ── BUSINESS RISKS SECTION ─────────────────────────────────────────── */}
+        {(result.risk || result.components?.risk?.score !== null) && (
+          <div className="mt-10">
+            <RiskSection
+              risk={
+                result.risk || {
+                  riskScore: result.components?.risk?.score,
+                  overallRiskLevel: result.components?.risk?.details?.overallRiskLevel,
+                  activeFlagsCount: result.components?.risk?.details?.activeFlagsCount,
+                  confidence: result.components?.risk?.confidence,
+                  flags: result.components?.risk?.details?.flags || [],
+                  activeFlags: result.components?.risk?.details?.activeFlags || [],
+                  dataNote: result.components?.risk?.details?.dataNote
+                }
+              }
+            />
           </div>
         )}
 

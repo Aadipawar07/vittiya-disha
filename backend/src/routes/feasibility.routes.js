@@ -11,6 +11,8 @@
 
 import { Router } from 'express'
 import { marketEngine } from '../market/market-engine.js'
+import { riskEngine } from '../risk/risk-engine.js'
+import { repaymentStressEngine } from '../risk/repayment-stress-engine.js'
 import { CONFIDENCE_LEVELS } from '../market/types.js'
 
 const router = Router()
@@ -18,12 +20,15 @@ const router = Router()
 // POST /api/feasibility/analyze
 router.post('/analyze', async (req, res, next) => {
   try {
-    const { businessType, location, financial, execution, assessmentId } = req.body
+    const { businessType, location, financial, execution, userInputs, assessmentId } = req.body
 
     const bType = businessType || 'grocery_shop'
     const locInput = location || {}
     const finInput = financial || {}
     const execInput = execution || {}
+    const userInputObj = userInputs || {
+      singleBuyerDependency: finInput.singleBuyerDependency ?? locInput.singleBuyerDependency
+    }
 
     // 1. Run Market Engine
     const market = await marketEngine.analyzeMarket({
@@ -33,22 +38,48 @@ router.post('/analyze', async (req, res, next) => {
       financialContext: finInput
     })
 
-    // 2. Financial Fit Component (Connected to financial rules)
+    // 2. Financial Fit & Repayment Stress Testing
     const projectReq = Number(finInput.projectRequirement) || 800000
     const eligibleLoan = Number(finInput.eligibleLoan) || Math.round(projectReq * 0.9)
     const ownContribution = Number(finInput.ownContribution) || Math.round(projectReq * 0.1)
     const schemeFinancingPercent = projectReq > 0 ? Math.round((eligibleLoan / projectReq) * 100) : 90
-    const repaymentBurdenRatio = 28 // 28% estimated debt-service ratio
 
-    const financialScore = Math.min(95, Math.max(50, Math.round(schemeFinancingPercent * 0.95)))
+    const monthlyIncome = Number(finInput.expectedMonthlyIncome || finInput.monthlyIncome || 0)
+    const interestRate = Number(finInput.annualInterestRate || 8.0)
+    const tenureMonths = Number(finInput.tenureMonths || 60)
 
-    // 3. Risk Component (Based on category-level rules)
-    const riskScore = 65 // moderate risk
-    const categoryRiskFactors = [
-      'Seasonal demand variation during monsoon / agricultural cycles.',
-      'Supply chain dependency on district-level wholesale distributors.',
-      'Working capital sensitivity to supplier payment terms.'
-    ]
+    const stressResult = repaymentStressEngine.runStressTest({
+      loanAmount: eligibleLoan,
+      annualInterestRate: interestRate,
+      tenureMonths: tenureMonths,
+      monthlyIncome: monthlyIncome,
+      monthlyEMI: finInput.monthlyEMI,
+      monthlyExpenses: finInput.monthlyExpenses
+    })
+
+    const repaymentBurdenRatio = stressResult.baseRatioPercent || 28
+
+    // Financial Fit Score: combination of financing coverage and debt repayment feasibility
+    let baseFinScore = Math.round(schemeFinancingPercent * 0.95)
+    if (stressResult.status === 'CALCULATED') {
+      if (stressResult.overallVerdict === 'COMFORTABLE') baseFinScore = Math.min(95, baseFinScore + 5)
+      else if (stressResult.overallVerdict === 'TIGHT') baseFinScore = Math.max(50, baseFinScore - 10)
+      else if (stressResult.overallVerdict === 'HIGH_RISK') baseFinScore = Math.max(40, baseFinScore - 20)
+    }
+    const financialScore = Math.min(95, Math.max(40, baseFinScore))
+
+    // 3. Risk Component (Evaluated by deterministic RiskEngine)
+    const riskResult = riskEngine.evaluateRisks({
+      businessType: bType,
+      marketContext: {
+        competitionScore: market.competition.competitionScore,
+        competitorCount10Km: market.competition.competitorCount10Km,
+        poiCoverageConfidence: market.competition.confidence
+      },
+      userInputs: userInputObj
+    })
+
+    const riskScore = riskResult.riskScore
 
     // 4. Execution Fit Component (User-reported)
     let executionScore = 65
@@ -163,13 +194,17 @@ router.post('/analyze', async (req, res, next) => {
         risk: {
           score: riskScore,
           weight: 0.15,
-          confidence: CONFIDENCE_LEVELS.LOW,
+          confidence: riskResult.confidence,
           dataLevel: 'CATEGORY_RULE',
-          type: 'ESTIMATED',
-          explanation: 'Risk assessment is derived from category-level rules. Insufficient village-specific risk data was available.',
+          type: 'CALCULATED',
+          explanation: `Risk evaluation identified ${riskResult.activeFlagsCount} active category and market risk factors (Overall: ${riskResult.overallRiskLevel} risk).`,
           details: {
-            riskFactors: categoryRiskFactors,
-            dataNote: 'Risk flags are derived from backend category rules, not local measurement.'
+            overallRiskLevel: riskResult.overallRiskLevel,
+            activeFlagsCount: riskResult.activeFlagsCount,
+            flags: riskResult.flags,
+            activeFlags: riskResult.activeFlags,
+            dataNote: riskResult.dataNote,
+            auditTrail: riskResult.auditTrail
           }
         },
         executionFit: {
@@ -187,6 +222,16 @@ router.post('/analyze', async (req, res, next) => {
           }
         }
       },
+      risk: {
+        riskScore: riskResult.riskScore,
+        overallRiskLevel: riskResult.overallRiskLevel,
+        activeFlagsCount: riskResult.activeFlagsCount,
+        confidence: riskResult.confidence,
+        flags: riskResult.flags,
+        activeFlags: riskResult.activeFlags,
+        auditTrail: riskResult.auditTrail
+      },
+      repaymentStress: stressResult,
       market: {
         businessType: bType,
         location: market.location,
@@ -199,12 +244,12 @@ router.post('/analyze', async (req, res, next) => {
       whyThisScore: [
         `Demand potential (${market.demand.auditTrail?.annualDemandValue?.formatted || 'Strong'}) supports local micro-enterprise viability.`,
         `Identified ${market.competition.competitorCount10Km} competitors within 10 km based on ${market.competition.source} data.`,
-        'Financial requirement is comfortably supported under corporation concessional credit limits.',
-        'Category-specific operational and working capital risks apply.',
+        `Repayment burden under expected scenario is ${stressResult.status === 'CALCULATED' ? `${stressResult.baseRatioPercent}% (${stressResult.overallVerdictLabel})` : 'estimated at sustainable levels'}.`,
+        `Identified ${riskResult.activeFlagsCount} operational risk flags (${riskResult.overallRiskLevel} overall risk profile).`,
         'Execution fit is based on your self-reported background.'
       ],
-      recommendation: `Your proposed ${bType.replace(/_/g, ' ')} shows ${label.toLowerCase()} based on current market and demographic data within a 10 km radius.`,
-      disclaimer: 'This feasibility score is an indicative assessment, not a guarantee of business success, loan approval, income or profitability. Some values may be estimated when village-level data is unavailable.'
+      recommendation: `Your proposed ${bType.replace(/_/g, ' ')} shows ${label.toLowerCase()} based on current market, demographic, risk, and repayment stress factors within a 10 km radius.`,
+      disclaimer: 'This feasibility score is an indicative assessment, not a guarantee of business success, loan approval, income or profitability. Stress scenarios and risk flags are mathematical simulations and rule-driven indicators.'
     }
 
     res.json(responseData)
