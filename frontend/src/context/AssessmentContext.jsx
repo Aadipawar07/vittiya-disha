@@ -1,5 +1,5 @@
 // Global assessment state context
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useRef } from 'react'
 
 export const AssessmentContext = createContext()
 
@@ -26,9 +26,28 @@ export const initialAssessment = {
 export function AssessmentProvider({ children }) {
   const [assessment, setAssessment] = useState(initialAssessment)
   const [assessmentResult, setAssessmentResult] = useState(null)
+  const [feasibilityResult, setFeasibilityResult] = useState(null)
+
+  // Stable assessment session ID — generated once per page session.
+  // Used as the :assessmentId URL param in /feasibility/:assessmentId.
+  // This is a client-side transient ID, not persisted to a database.
+  const assessmentIdRef = useRef(
+    typeof crypto !== 'undefined' && crypto.randomUUID
+      ? crypto.randomUUID()
+      : `sess-${Date.now()}`
+  )
+  const assessmentId = assessmentIdRef.current
 
   return (
-    <AssessmentContext.Provider value={{ assessment, setAssessment, assessmentResult, setAssessmentResult }}>
+    <AssessmentContext.Provider value={{
+      assessment,
+      setAssessment,
+      assessmentResult,
+      setAssessmentResult,
+      feasibilityResult,
+      setFeasibilityResult,
+      assessmentId
+    }}>
       {children}
     </AssessmentContext.Provider>
   )

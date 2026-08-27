@@ -16,6 +16,7 @@ import Lenders from './pages/Lenders'
 import Report from './pages/Report'
 import OfficerDashboard from './pages/OfficerDashboard'
 import SchemeResults from './pages/SchemeResults'
+import FeasibilityPage from './pages/FeasibilityPage'
 
 function AppContent() {
   useRevealOnScroll()
@@ -31,6 +32,7 @@ function AppContent() {
           <Route path="/analysis" element={<Analysis />} />
           <Route path="/schemes" element={<Schemes />} />
           <Route path="/scheme-results/:schemeCode" element={<SchemeResults />} />
+          <Route path="/feasibility/:assessmentId" element={<FeasibilityPage />} />
           <Route path="/financial" element={<Financial />} />
           <Route path="/stress-test" element={<StressTest />} />
           <Route path="/lenders" element={<Lenders />} />

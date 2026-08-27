@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { AlertCircle, ArrowLeft, CheckCircle2, FileText, ShieldCheck } from 'lucide-react'
+import { AlertCircle, ArrowLeft, CheckCircle2, FileText, ShieldCheck, TrendingUp } from 'lucide-react'
 import { useAssessment } from '../hooks/useAssessment'
 
 const money = (value) => value === undefined || value === null ? 'Not available' : `INR ${Number(value).toLocaleString('en-IN')}`
@@ -29,7 +29,7 @@ function ListSection({ icon, title: sectionTitle, items, empty = 'None recorded'
 
 export default function SchemeResults() {
   const { schemeCode } = useParams()
-  const { assessmentResult } = useAssessment()
+  const { assessmentResult, assessmentId } = useAssessment()
   const result = assessmentResult
   const recommendation = result?.recommendation || (result?.scheme ? { scheme_code: result.scheme.schemeId, scheme_name: result.scheme.schemeId, status: result.eligibility?.status, match_score: null } : null)
   const financial = result?.financial || result?.financing
@@ -64,6 +64,32 @@ export default function SchemeResults() {
     {result.business?.breakdown && <section className="result-section mt-6"><p className="result-note">ESTIMATED BUSINESS SETUP</p><h2 className="font-display text-2xl font-semibold mt-2 mb-5">Cost breakdown</h2><div className="space-y-3">{Object.entries(result.business.breakdown).map(([key, item]) => <div className="flex justify-between gap-4 text-sm border-b border-line pb-2" key={key}><span className="capitalize text-inkSoft">{key.replaceAll('_', ' ')}</span><span className="font-mono">{money(item.amount)}</span></div>)}<div className="flex justify-between gap-4 font-semibold pt-2"><span>Total planning estimate</span><span className="font-mono">{money(result.business.estimatedProjectCost)}</span></div></div><p className="text-xs text-inkSoft mt-5">Planning estimate only. Component sources and confidence are retained by the backend.</p></section>}
     {lenders.length > 0 && <section className="mt-12"><p className="eyebrow">Where to apply</p><h2 className="font-display text-3xl font-semibold mb-5">District channel partners</h2><div className="grid md:grid-cols-2 gap-4">{lenders.map((lender) => <div className="result-alternative items-start" key={`${lender.partnerName}-${lender.branchAddress}`}><div><p className="font-display text-xl font-semibold">{lender.partnerName}</p><p className="text-sm text-inkSoft mt-1">{lender.partnerType?.replaceAll('_', ' ')}</p><p className="text-sm mt-4">Beneficiary rate: <span className="font-mono">{lender.beneficiaryRate === null ? 'Scheme rate' : `${lender.beneficiaryRate}%`}</span></p><p className="text-sm text-inkSoft mt-2">{lender.branchAddress} · {lender.contactPoint}</p><p className="text-xs text-inkSoft mt-3">Last verified {lender.lastVerifiedDate} · {lender.confidence}</p><p className="text-xs text-inkSoft mt-2">Charges: Contact branch to confirm</p></div></div>)}</div></section>}
     {alternatives.length > 0 && <section className="mt-12"><p className="eyebrow">Other routes evaluated</p><div className="grid md:grid-cols-2 gap-4">{alternatives.slice(0, 4).map((alternative) => <div className="result-alternative" key={alternative.scheme_code}><div><p className="font-display text-xl font-semibold">{alternative.scheme_name}</p><p className="font-mono text-xs text-inkSoft mt-1">{alternative.scheme_code}</p></div><span className="font-mono text-sm">{alternative.status}</span></div>)}</div></section>}
+    {/* Feasibility Analysis CTA */}
+    <section className="mt-12 rounded-2xl border-2 border-saffron/30 bg-saffron/5 p-6 md:p-8">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="flex items-start gap-4">
+          <TrendingUp className="text-saffronDeep shrink-0 mt-1" size={26} aria-hidden="true" />
+          <div>
+            <p className="result-note mb-1">NEXT STEP</p>
+            <h2 className="font-display text-2xl font-semibold mb-2">Business Feasibility Analysis</h2>
+            <p className="text-sm text-inkSoft leading-relaxed max-w-lg">
+              Get an indicative feasibility score for your business based on local demand,
+              competition, financial fit and your self-reported readiness.
+              This is an estimate — not a guarantee of success.
+            </p>
+          </div>
+        </div>
+        <Link
+          to={`/feasibility/${assessmentId}`}
+          className="btn-primary text-beige font-bold px-7 py-3 rounded-full shrink-0 inline-flex items-center gap-2 whitespace-nowrap"
+          id="view-feasibility-btn"
+        >
+          <TrendingUp size={16} aria-hidden="true" />
+          View Feasibility Analysis
+        </Link>
+      </div>
+    </section>
     <footer className="result-disclaimer mt-12"><p className="font-semibold">A decision-support result, not an approval.</p><p className="text-sm mt-1">{result.disclaimer || 'Final eligibility is subject to official verification and channel-partner terms.'}</p></footer>
   </div></div>
 }
+
