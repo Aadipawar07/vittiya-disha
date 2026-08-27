@@ -24,6 +24,7 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/assess" element={<BusinessInput />} />
+          <Route path="/start-assessment" element={<BusinessInput />} />
           <Route path="/analysis" element={<Analysis />} />
           <Route path="/schemes" element={<Schemes />} />
           <Route path="/financial" element={<Financial />} />
