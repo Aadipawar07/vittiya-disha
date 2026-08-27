@@ -11,7 +11,7 @@ const group = z.object({ group_type: z.string().optional(), group_size: z.number
 const education = z.object({ course_name: z.string().optional(), course_type: z.string().optional(), institution: z.string().optional(), course_fee: optionalNumber, india_or_abroad: z.string().optional(), country: z.string().optional(), admission_status: z.string().optional(), education_level: z.string().optional() }).default({})
 const nskfdc = z.object({ beneficiary_type: z.string().optional(), equipment_required: z.union([z.boolean(), z.string()]).optional(), vehicle_required: z.union([z.boolean(), z.string()]).optional(), equipment_type: z.string().optional(), vehicle_type: z.string().optional(), applicant_type: z.string().optional(), sanitation_project: z.string().optional() }).default({})
 const business = z.record(z.any()).default({})
-const financial = z.object({ ownContribution: optionalNumber.optional(), otherFunding: optionalNumber.optional() }).default({})
+const financial = z.object({ requestedAmount: optionalNumber, ownContribution: optionalNumber, otherFunding: optionalNumber }).default({})
 
 export const assessmentSchema = z.object({ corporation: z.enum(CORPORATIONS), profile, requirement, business, group, education, nskfdc, financial }).superRefine((value, context) => {
   const r = { ...value.business, ...value.requirement }
