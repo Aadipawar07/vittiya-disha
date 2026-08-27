@@ -1,0 +1,227 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  body {
+    @apply bg-beige text-ink font-sans;
+    position: relative;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  /* Blueprint grid backgrounds */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(36, 27, 18, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(36, 27, 18, 0.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  .grid-bg-fine {
+    background-image:
+      linear-gradient(rgba(36, 27, 18, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(36, 27, 18, 0.045) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .dot-bg {
+    background-image: radial-gradient(rgba(232, 118, 44, 0.35) 1.5px, transparent 1.5px);
+    background-size: 20px 20px;
+  }
+
+  /* Blobs */
+  .blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(70px);
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  /* Corner brackets on cards */
+  .bracket {
+    position: relative;
+  }
+
+  .bracket::before,
+  .bracket::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-color: #E8762C;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .bracket::before {
+    top: 10px;
+    left: 10px;
+    border-top: 2px solid;
+    border-left: 2px solid;
+  }
+
+  .bracket::after {
+    bottom: 10px;
+    right: 10px;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+  }
+
+  .bracket:hover::before,
+  .bracket:hover::after {
+    opacity: 1;
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Button styles */
+  .btn-primary {
+    background: linear-gradient(135deg, #E8762C, #B8541A);
+    box-shadow: 0 10px 30px -8px rgba(184, 84, 26, 0.55);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 16px 36px -6px rgba(184, 84, 26, 0.65);
+  }
+
+  .btn-ghost {
+    transition: all 0.25s ease;
+  }
+
+  .btn-ghost:hover {
+    @apply bg-ink text-beige;
+  }
+
+  /* Card hover effect */
+  .card-hover {
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-8px) rotate(-0.3deg);
+    box-shadow: 0 24px 48px -20px rgba(36, 27, 18, 0.35);
+  }
+
+  /* Step indicator */
+  .step-dot {
+    transition: all 0.4s ease;
+  }
+
+  .step-line-fill {
+    transition: width 0.5s ease;
+  }
+
+  /* Range slider */
+  input[type='range'] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, #E8762C, #E3D2AC);
+    width: 100%;
+    cursor: pointer;
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 9999px;
+    background: #241B12;
+    border: 4px solid #F4E9D8;
+    box-shadow: 0 0 0 2px #E8762C, 0 4px 12px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin-top: -8px;
+  }
+
+  input[type='range']::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 9999px;
+    background: #241B12;
+    border: 4px solid #F4E9D8;
+    box-shadow: 0 0 0 2px #E8762C, 0 4px 12px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+  }
+
+  /* Fill bar animation */
+  .fillbar {
+    transition: width 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  /* Nav link underline */
+  .nav-link {
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background: #E8762C;
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.current::after {
+    width: 100%;
+  }
+}
+
+/* Marquee animation */
+.marquee-track {
+  display: flex;
+  animation: marquee 22s linear infinite;
+  width: max-content;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Stamp styling */
+.stamp {
+  transform: rotate(-8deg);
+  border: 3px solid #B8541A;
+  color: #B8541A;
+}
+
+::selection {
+  background: #E8762C;
+  color: #F4E9D8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,29 @@
+# Node modules
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Vite build output
+dist/
+.vite/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Build artifacts
+build/
+out/

@@ -1,0 +1,81 @@
+/* ScoreOrb - Exact styles from prototype */
+
+.orb-wrap {
+  position: relative;
+  width: 230px;
+  height: 230px;
+}
+
+.orb-wrap.small {
+  width: 150px;
+  height: 150px;
+}
+
+.orb-core {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: conic-gradient(
+    from 0deg,
+    var(--state-color),
+    color-mix(in srgb, var(--state-color) 30%, white),
+    var(--state-color)
+  );
+  animation: spin 7s linear infinite;
+  box-shadow: 0 0 90px -6px var(--state-soft), inset 0 0 40px rgba(255, 255, 255, 0.3);
+}
+
+.orb-glass {
+  position: absolute;
+  inset: 9%;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at 30% 26%,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.05) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.orb-ring {
+  position: absolute;
+  inset: -14px;
+  border-radius: 9999px;
+  border: 1.5px dashed color-mix(in srgb, var(--state-color) 45%, transparent);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.orb-score {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb-core,
+  .orb-ring {
+    animation: none !important;
+  }
+}
