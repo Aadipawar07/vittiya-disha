@@ -1,0 +1,136 @@
+{
+  "grocery_shop": {
+    "displayName": "Grocery Shop / Kirana",
+    "googlePlacesTypes": ["grocery_store", "supermarket", "convenience_store"],
+    "osmTags": [
+      { "shop": "convenience" },
+      { "shop": "supermarket" },
+      { "shop": "general" },
+      { "shop": "grocery" }
+    ],
+    "keywords": ["kirana", "grocery", "provision store", "general store"]
+  },
+  "salon": {
+    "displayName": "Salon / Beauty Parlour",
+    "googlePlacesTypes": ["hair_care", "beauty_salon", "spa"],
+    "osmTags": [
+      { "shop": "hairdresser" },
+      { "shop": "beauty" }
+    ],
+    "keywords": ["salon", "parlour", "beauty parlour", "hair salon", "barber"]
+  },
+  "tailoring": {
+    "displayName": "Tailoring / Boutique",
+    "googlePlacesTypes": ["clothing_store", "tailor"],
+    "osmTags": [
+      { "shop": "tailor" },
+      { "shop": "clothes" },
+      { "craft": "tailor" }
+    ],
+    "keywords": ["tailor", "tailoring", "ladies tailor", "boutique", "stitching"]
+  },
+  "restaurant": {
+    "displayName": "Restaurant / Food Stall / Dhaba",
+    "googlePlacesTypes": ["restaurant", "cafe", "meal_takeaway"],
+    "osmTags": [
+      { "amenity": "restaurant" },
+      { "amenity": "cafe" },
+      { "amenity": "fast_food" }
+    ],
+    "keywords": ["restaurant", "dhaba", "hotel", "canteen", "tiffin", "mess"]
+  },
+  "dairy": {
+    "displayName": "Dairy / Milk Collection Center",
+    "googlePlacesTypes": ["grocery_store", "food_store"],
+    "osmTags": [
+      { "shop": "dairy" },
+      { "craft": "dairy" }
+    ],
+    "keywords": ["dairy", "milk dairy", "doodh", "milk center", "paneer"]
+  },
+  "poultry": {
+    "displayName": "Poultry / Livestock Farm",
+    "googlePlacesTypes": ["meat_store", "pet_store"],
+    "osmTags": [
+      { "shop": "butcher" },
+      { "landuse": "farmland" }
+    ],
+    "keywords": ["poultry", "chicken center", "egg store", "poultry farm"]
+  },
+  "workshop": {
+    "displayName": "Automobile / Repair Workshop",
+    "googlePlacesTypes": ["car_repair", "hardware_store"],
+    "osmTags": [
+      { "shop": "car_repair" },
+      { "craft": "blacksmith" },
+      { "craft": "carpenter" }
+    ],
+    "keywords": ["garage", "puncture", "repair workshop", "welding", "motor rewinding"]
+  },
+  "retail": {
+    "displayName": "Retail / Hardware / Electronics",
+    "googlePlacesTypes": ["hardware_store", "electronics_store", "store"],
+    "osmTags": [
+      { "shop": "hardware" },
+      { "shop": "electronics" },
+      { "shop": "variety_store" }
+    ],
+    "keywords": ["hardware", "electrical", "mobile shop", "footwear", "stationery"]
+  },
+  "manufacturing": {
+    "displayName": "Small Manufacturing / Processing",
+    "googlePlacesTypes": ["store", "factory"],
+    "osmTags": [
+      { "craft": "carpenter" },
+      { "craft": "pottery" },
+      { "industrial": "factory" }
+    ],
+    "keywords": ["flour mill", "atta chakki", "oil mill", "manufacturing", "processing unit"]
+  },
+  "service_business": {
+    "displayName": "Service Business / Printing / Photo",
+    "googlePlacesTypes": ["accounting", "lawyer", "store"],
+    "osmTags": [
+      { "shop": "copyshop" },
+      { "shop": "photo" },
+      { "amenity": "internet_cafe" }
+    ],
+    "keywords": ["xerox", "printing", "csc center", "cyber cafe", "photo studio", "service center"]
+  },
+  "transport": {
+    "displayName": "Transport / Auto Rickshaw / Logistics",
+    "googlePlacesTypes": ["transit_station", "moving_company"],
+    "osmTags": [
+      { "amenity": "taxi" },
+      { "amenity": "bus_station" }
+    ],
+    "keywords": ["transport", "goods carrier", "auto stand", "travels", "logistics"]
+  },
+  "pharmacy": {
+    "displayName": "Pharmacy / Medical Store",
+    "googlePlacesTypes": ["pharmacy", "drugstore"],
+    "osmTags": [
+      { "amenity": "pharmacy" },
+      { "shop": "chemist" }
+    ],
+    "keywords": ["medical store", "pharmacy", "chemist", "dawakhana"]
+  },
+  "sanitation_enterprise": {
+    "displayName": "Sanitation Enterprise / Waste Management",
+    "googlePlacesTypes": ["hardware_store", "local_government_office"],
+    "osmTags": [
+      { "amenity": "waste_disposal" },
+      { "amenity": "recycling" }
+    ],
+    "keywords": ["sanitation", "scrap", "kabaad", "recycling", "cleaning services"]
+  },
+  "green_business": {
+    "displayName": "Green Business / Solar / Organic",
+    "googlePlacesTypes": ["hardware_store", "home_goods_store"],
+    "osmTags": [
+      { "shop": "energy" },
+      { "shop": "organic" }
+    ],
+    "keywords": ["solar", "organic farming", "biofertilizer", "vermicompost", "green energy"]
+  }
+}

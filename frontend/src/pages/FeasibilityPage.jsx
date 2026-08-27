@@ -26,6 +26,12 @@ import FeasibilityComponentCard from '../components/feasibility/FeasibilityCompo
 import WeightedBreakdown from '../components/feasibility/WeightedBreakdown.jsx'
 import DataTransparencyPanel from '../components/feasibility/DataTransparencyPanel.jsx'
 import FeasibilityDisclaimer from '../components/feasibility/FeasibilityDisclaimer.jsx'
+import MarketMap from '../components/market/MarketMap.jsx'
+import CompetitorList from '../components/market/CompetitorList.jsx'
+import PopulationCard from '../components/market/PopulationCard.jsx'
+import DemandCalculationCard from '../components/market/DemandCalculationCard.jsx'
+import AlternativeBusinesses from '../components/market/AlternativeBusinesses.jsx'
+import ActionableImprovements from '../components/market/ActionableImprovements.jsx'
 
 // ─── Loading messages — cycle through these during analysis ─────────────────
 const LOADING_MESSAGES = [
@@ -325,15 +331,21 @@ export default function FeasibilityPage() {
     const business = assessment?.business ?? {}
     const financial = assessment?.financial ?? {}
     const execution = assessment?.execution ?? {}
+    const loc = assessment?.location ?? {}
     const assessmentFinancial = assessmentResult?.financial ?? assessmentResult?.financing ?? {}
 
     return {
       businessType: business.businessType ?? 'unknown',
       location: {
-        village: profile.village ?? null,
-        block: profile.block ?? null,
-        district: profile.district ?? null,
-        state: profile.state ?? null
+        // Prefer precise coordinates from location picker / geocoder
+        latitude: loc.latitude ?? null,
+        longitude: loc.longitude ?? null,
+        village: loc.village ?? profile.village ?? null,
+        block: loc.block ?? profile.block ?? null,
+        district: loc.district ?? profile.district ?? null,
+        state: loc.state ?? profile.state ?? null,
+        locationSource: loc.locationSource ?? null,
+        pincode: loc.pincode ?? null
       },
       financial: {
         projectRequirement: Number(financial.requestedAmount ?? assessmentFinancial?.requestedLoan ?? 0),
@@ -478,6 +490,59 @@ export default function FeasibilityPage() {
         <div className="mt-6">
           <Recommendation text={result.recommendation} />
         </div>
+
+        {/* ── MARKET INTELLIGENCE SECTIONS ───────────────────────────────────── */}
+        {result.market && (
+          <div className="mt-10 space-y-8" id="market-intelligence">
+            <div className="flex items-center gap-4 pt-4 border-t-2 border-ink/10">
+              <h2 className="font-display text-3xl font-semibold">Market Intelligence</h2>
+              <span className="font-mono text-xs text-inkSoft border border-line rounded px-2.5 py-1">10 km Radius Analysis</span>
+            </div>
+
+            {/* Interactive Market Map */}
+            {result.market.location?.latitude && (
+              <MarketMap
+                centerLat={result.market.location.latitude}
+                centerLon={result.market.location.longitude}
+                businessType={result.market.businessType}
+                competitors={result.market.competition?.competitors ?? []}
+                radiusKm={10}
+                locationName={result.market.location.formattedAddress || result.market.location.village || 'Proposed Location'}
+              />
+            )}
+
+            {/* Population Demographics */}
+            {result.market.population && (
+              <PopulationCard population={result.market.population} />
+            )}
+
+            {/* Competitor Discovery */}
+            {result.market.competition && (
+              <CompetitorList
+                competitors={result.market.competition.competitors ?? []}
+                totalCount={result.market.competition.competitorCount10Km ?? result.market.competition.competitors?.length ?? 0}
+                searchRadiusKm={10}
+                coverageWarning={result.market.competition.coverageWarning}
+                source={result.market.competition.source ?? 'OpenStreetMap / Google Places'}
+              />
+            )}
+
+            {/* Demand Calculation */}
+            {result.market.demand && (
+              <DemandCalculationCard demand={result.market.demand} />
+            )}
+
+            {/* Alternative Businesses */}
+            {result.market.alternatives && result.market.alternatives.length > 0 && (
+              <AlternativeBusinesses alternatives={result.market.alternatives} />
+            )}
+
+            {/* Actionable Improvements */}
+            {result.market.improvements && result.market.improvements.length > 0 && (
+              <ActionableImprovements improvements={result.market.improvements} />
+            )}
+          </div>
+        )}
 
         {/* ── ACTION BUTTONS ─────────────────────────────────────────────────── */}
         <ActionButtons schemeCode={schemeCode} />

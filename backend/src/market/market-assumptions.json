@@ -1,0 +1,170 @@
+{
+  "grocery_shop": {
+    "relevantDemographicShare": {
+      "value": 0.85,
+      "source": "Census 2011 Household Head Population",
+      "sourceType": "OFFICIAL_SURVEY"
+    },
+    "categoryAdoptionRate": {
+      "value": 0.95,
+      "source": "NSSO Household Consumer Expenditure Survey",
+      "sourceType": "INDUSTRY_ESTIMATE"
+    },
+    "purchaseFrequency": {
+      "value": 52,
+      "unit": "per_year",
+      "source": "NABARD Rural Retail Baseline 2023",
+      "sourceType": "INDUSTRY_ESTIMATE"
+    },
+    "averageTransactionValue": {
+      "value": 320,
+      "currency": "INR",
+      "source": "RBI Rural Cash Flow & Small Merchant Index",
+      "sourceType": "OFFICIAL_SURVEY"
+    }
+  },
+  "dairy": {
+    "relevantDemographicShare": {
+      "value": 0.70,
+      "source": "Livestock & Dairy Census / NDDB",
+      "sourceType": "OFFICIAL_SURVEY"
+    },
+    "categoryAdoptionRate": {
+      "value": 0.80,
+      "source": "National Dairy Development Board Rural Baseline",
+      "sourceType": "INDUSTRY_ESTIMATE"
+    },
+    "purchaseFrequency": {
+      "value": 180,
+      "unit": "per_year",
+      "source": "Rural Consumption Norms",
+      "sourceType": "INDUSTRY_ESTIMATE"
+    },
+    "averageTransactionValue": {
+      "value": 65,
+      "currency": "INR",
+      "source": "State Milk Federation Farmgate Price",
+      "sourceType": "OFFICIAL_SURVEY"
+    }
+  },
+  "salon": {
+    "relevantDemographicShare": {
+      "value": 0.60,
+      "source": "Census Working Age Cohort (15-59)",
+      "sourceType": "OFFICIAL_SURVEY"
+    },
+    "categoryAdoptionRate": {
+      "value": 0.65,
+      "source": "MSME Personal Services Study",
+      "sourceType": "INDUSTRY_ESTIMATE"
+    },
+    "purchaseFrequency": {
+      "value": 12,
+      "unit": "per_year",
+      "source": "Rural Grooming Expenditure Index",
+      "sourceType": "INDUSTRY_ESTIMATE"
+    },
+    "averageTransactionValue": {
+      "value": 120,
+      "currency": "INR",
+      "source": "Local Category Benchmark",
+      "sourceType": "INDUSTRY_ESTIMATE"
+    }
+  },
+  "tailoring": {
+    "relevantDemographicShare": {
+      "value": 0.65,
+      "source": "Census Household Demographics",
+      "sourceType": "OFFICIAL_SURVEY"
+    },
+    "categoryAdoptionRate": {
+      "value": 0.60,
+      "source": "Khadi & Village Industries Commission (KVIC)",
+      "sourceType": "INDUSTRY_ESTIMATE"
+    },
+    "purchaseFrequency": {
+      "value": 6,
+      "unit": "per_year",
+      "source": "Apparel Stitching Cycle",
+      "sourceType": "INDUSTRY_ESTIMATE"
+    },
+    "averageTransactionValue": {
+      "value": 250,
+      "currency": "INR",
+      "source": "District Industrial Center (DIC) Rates",
+      "sourceType": "OFFICIAL_SURVEY"
+    }
+  },
+  "restaurant": {
+    "relevantDemographicShare": {
+      "value": 0.45,
+      "source": "Transit & Local Working Population",
+      "sourceType": "ESTIMATED"
+    },
+    "categoryAdoptionRate": {
+      "value": 0.50,
+      "source": "Food Service Market India",
+      "sourceType": "INDUSTRY_ESTIMATE"
+    },
+    "purchaseFrequency": {
+      "value": 24,
+      "unit": "per_year",
+      "source": "Rural & Semi-Urban Quick Service Dining Study",
+      "sourceType": "INDUSTRY_ESTIMATE"
+    },
+    "averageTransactionValue": {
+      "value": 110,
+      "currency": "INR",
+      "source": "Local Dhaba & Eatery Pricing Index",
+      "sourceType": "INDUSTRY_ESTIMATE"
+    }
+  },
+  "workshop": {
+    "relevantDemographicShare": {
+      "value": 0.40,
+      "source": "Two-Wheeler & Agri Equipment Ownership Demographics",
+      "sourceType": "OFFICIAL_SURVEY"
+    },
+    "categoryAdoptionRate": {
+      "value": 0.70,
+      "source": "Automotive Service Association Survey",
+      "sourceType": "INDUSTRY_ESTIMATE"
+    },
+    "purchaseFrequency": {
+      "value": 4,
+      "unit": "per_year",
+      "source": "Vehicle Maintenance Norms",
+      "sourceType": "INDUSTRY_ESTIMATE"
+    },
+    "averageTransactionValue": {
+      "value": 450,
+      "currency": "INR",
+      "source": "Small Garage Benchmark",
+      "sourceType": "INDUSTRY_ESTIMATE"
+    }
+  },
+  "pharmacy": {
+    "relevantDemographicShare": {
+      "value": 0.90,
+      "source": "General Population Healthcare Demographics",
+      "sourceType": "OFFICIAL_SURVEY"
+    },
+    "categoryAdoptionRate": {
+      "value": 0.75,
+      "source": "National Health Profile / NSO",
+      "sourceType": "OFFICIAL_SURVEY"
+    },
+    "purchaseFrequency": {
+      "value": 10,
+      "unit": "per_year",
+      "source": "Essential Medicine Consumption Index",
+      "sourceType": "INDUSTRY_ESTIMATE"
+    },
+    "averageTransactionValue": {
+      "value": 280,
+      "currency": "INR",
+      "source": "Pharmacy Retail Benchmark",
+      "sourceType": "INDUSTRY_ESTIMATE"
+    }
+  }
+}

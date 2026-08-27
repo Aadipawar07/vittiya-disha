@@ -10,6 +10,8 @@ import businessRoutes from './routes/business.routes.js'
 import lenderRoutes from './routes/lender.routes.js'
 import assessmentFinancialRoutes from './routes/assessment-financial.routes.js'
 import feasibilityRoutes from './routes/feasibility.routes.js'
+import locationRoutes from './routes/location.routes.js'
+import marketRoutes from './routes/market.routes.js'
 
 export function createApp() {
   const app = express()
@@ -23,6 +25,8 @@ export function createApp() {
   app.use('/api/lenders', lenderRoutes)
   app.use('/api/assessment', assessmentFinancialRoutes)
   app.use('/api/feasibility', feasibilityRoutes)
+  app.use('/api/location', locationRoutes)
+  app.use('/api/market', marketRoutes)
   app.use(notFound)
   app.use(errorHandler)
   return app

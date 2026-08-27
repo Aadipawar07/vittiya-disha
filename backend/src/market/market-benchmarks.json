@@ -1,0 +1,44 @@
+{
+  "grocery_shop": {
+    "benchmarkAnnualDemand": 25000000,
+    "benchmarkUnit": "INR_PER_YEAR",
+    "source": "NABARD / NSO Rural Micro-Enterprise Benchmark",
+    "sourceType": "INDUSTRY_BENCHMARK"
+  },
+  "dairy": {
+    "benchmarkAnnualDemand": 18000000,
+    "benchmarkUnit": "INR_PER_YEAR",
+    "source": "NDDB Small Dairy Unit Viability Benchmark",
+    "sourceType": "INDUSTRY_BENCHMARK"
+  },
+  "salon": {
+    "benchmarkAnnualDemand": 3500000,
+    "benchmarkUnit": "INR_PER_YEAR",
+    "source": "MSME Beauty & Wellness Sector Model",
+    "sourceType": "INDUSTRY_BENCHMARK"
+  },
+  "tailoring": {
+    "benchmarkAnnualDemand": 2800000,
+    "benchmarkUnit": "INR_PER_YEAR",
+    "source": "KVIC Apparel Cluster Viability Report",
+    "sourceType": "INDUSTRY_BENCHMARK"
+  },
+  "restaurant": {
+    "benchmarkAnnualDemand": 7500000,
+    "benchmarkUnit": "INR_PER_YEAR",
+    "source": "NRAI Small Food Enterprise Benchmark",
+    "sourceType": "INDUSTRY_BENCHMARK"
+  },
+  "workshop": {
+    "benchmarkAnnualDemand": 4200000,
+    "benchmarkUnit": "INR_PER_YEAR",
+    "source": "Automotive Skill Development Council",
+    "sourceType": "INDUSTRY_BENCHMARK"
+  },
+  "pharmacy": {
+    "benchmarkAnnualDemand": 15000000,
+    "benchmarkUnit": "INR_PER_YEAR",
+    "source": "Retail Chemist Feasibility Standard",
+    "sourceType": "INDUSTRY_BENCHMARK"
+  }
+}
