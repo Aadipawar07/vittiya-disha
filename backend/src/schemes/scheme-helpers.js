@@ -1,0 +1,8 @@
+const field = (path) => (user) => path.split('.').reduce((value, key) => value?.[key], user)
+export const rule = (id, path, test, expected, operator = '=') => ({ id, getActual: field(path), test, expected, operator })
+export const purposeRule = (purpose) => rule('PURPOSE', 'requirement.purpose', (value) => value === purpose, purpose)
+export const incomeRule = (limit) => rule('FAMILY_INCOME_LIMIT', 'profile.annual_family_income', (value) => value <= limit, limit, '<=')
+export const categoryRule = (category) => rule('CATEGORY', 'profile.category', (value) => value === category, category)
+export const interest = (rate) => ({ rate, rate_type: 'annual' })
+export const rangeInterest = (min, max) => ({ rate_min: min, rate_max: max, rate_type: 'annual' })
+export const baseMeta = (code, corporation, name, purpose, description) => ({ scheme_code: code, corporation, scheme_name: name, purpose: [purpose], description, active: true, source_reference: 'Provided scheme specification', required_documents: ['Identity proof', 'Address proof', 'Income/category documents as applicable'], verification_conditions: ['Official document and channel-partner verification required'] })
