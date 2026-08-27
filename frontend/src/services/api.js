@@ -8,7 +8,7 @@ const apiClient = axios.create({
 export default apiClient
 
 export async function submitAssessment(payload) {
-  if (import.meta.env.VITE_USE_MOCK_API !== 'false') {
+  if (import.meta.env.VITE_USE_MOCK_API === 'true') {
     return new Promise((resolve) => {
       window.setTimeout(() => resolve({ received: true, recommendation: null }), 900)
     })

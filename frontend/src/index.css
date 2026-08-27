@@ -67,6 +67,50 @@
     @apply border-saffron bg-saffron;
   }
 
+  .result-status {
+    @apply flex items-start gap-4 rounded-2xl border-2 p-5 md:p-6;
+  }
+
+  .result-status-go {
+    @apply border-go/30 bg-go/10 text-go;
+  }
+
+  .result-status-check {
+    @apply border-gold/40 bg-gold/10 text-ink;
+  }
+
+  .result-status-stop {
+    @apply border-maroon/30 bg-maroon/10 text-maroon;
+  }
+
+  .result-score {
+    @apply flex shrink-0 flex-col items-center border-l-2 border-saffron pl-5 text-saffronDeep;
+  }
+
+  .result-section {
+    @apply rounded-2xl border-2 border-ink/10 bg-beige/80 p-6 md:p-8;
+  }
+
+  .result-metric {
+    @apply bg-beige p-5;
+  }
+
+  .result-note {
+    @apply font-mono text-xs font-semibold tracking-widest text-saffronDeep;
+  }
+
+  .result-explanation {
+    @apply border-saffron/30 bg-saffron/5;
+  }
+
+  .result-alternative {
+    @apply flex items-center justify-between gap-4 rounded-xl border-2 border-ink/10 bg-beigeCard p-5;
+  }
+
+  .result-disclaimer {
+    @apply border-l-4 border-saffron bg-beigeCard px-5 py-4 text-inkSoft;
+  }
+
   /* Blueprint grid backgrounds */
   .grid-bg {
     background-image:

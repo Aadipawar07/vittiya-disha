@@ -25,9 +25,10 @@ export const initialAssessment = {
 
 export function AssessmentProvider({ children }) {
   const [assessment, setAssessment] = useState(initialAssessment)
+  const [assessmentResult, setAssessmentResult] = useState(null)
 
   return (
-    <AssessmentContext.Provider value={{ assessment, setAssessment }}>
+    <AssessmentContext.Provider value={{ assessment, setAssessment, assessmentResult, setAssessmentResult }}>
       {children}
     </AssessmentContext.Provider>
   )

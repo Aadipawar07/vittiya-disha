@@ -13,6 +13,7 @@ import StressTest from './pages/StressTest'
 import Lenders from './pages/Lenders'
 import Report from './pages/Report'
 import OfficerDashboard from './pages/OfficerDashboard'
+import SchemeResults from './pages/SchemeResults'
 
 function AppContent() {
   useRevealOnScroll()
@@ -27,6 +28,7 @@ function AppContent() {
           <Route path="/start-assessment" element={<BusinessInput />} />
           <Route path="/analysis" element={<Analysis />} />
           <Route path="/schemes" element={<Schemes />} />
+          <Route path="/scheme-results/:schemeCode" element={<SchemeResults />} />
           <Route path="/financial" element={<Financial />} />
           <Route path="/stress-test" element={<StressTest />} />
           <Route path="/lenders" element={<Lenders />} />

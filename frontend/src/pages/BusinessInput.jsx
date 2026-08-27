@@ -116,7 +116,7 @@ function BusinessFields({ data, onChange, errors, large = false, sanitation = fa
 }
 
 export default function BusinessInput() {
-  const { assessment, setAssessment } = useAssessment()
+  const { assessment, setAssessment, setAssessmentResult } = useAssessment()
   const navigate = useNavigate()
   const [step, setStep] = useState(1)
   const [errors, setErrors] = useState({})
@@ -202,7 +202,13 @@ export default function BusinessInput() {
 
   const submit = async () => {
     setSubmitState('loading')
-    try { await submitAssessment(cleanPayload()); setSubmitState('success'); navigate('/schemes') } catch (error) { setSubmitState('error') }
+    try {
+      const response = await submitAssessment(cleanPayload())
+      const result = response.data || response
+      setAssessmentResult(result)
+      setSubmitState('success')
+      navigate(`/scheme-results/${result.recommendation?.scheme_code || 'unavailable'}`)
+    } catch (error) { setSubmitState('error') }
   }
 
   const detailChange = (event) => update(selectedPurpose === 'education' ? 'education' : selectedPurpose === 'group' ? 'group' : 'business', event.target.name)(event)
