@@ -40,11 +40,11 @@ export default function ScoreOrb({ score = 0, state = 'go', size = 'large' }) {
 
       {/* Score text */}
       <div className="orb-score">
-        <div className={`font-mono font-bold text-white ${isSmall ? 'text-3xl' : 'text-5xl'}`}>
+        <div className={`font-mono font-bold text-white ${isSmall ? 'text-3xl' : 'text-6xl'}`}>
           {Math.round(score)}
         </div>
         {!isSmall && (
-          <div className="font-mono text-white/90 text-xs mt-1">/100</div>
+          <div className="orb-label font-sans text-white text-xs mt-0">FEASIBILITY</div>
         )}
       </div>
     </div>

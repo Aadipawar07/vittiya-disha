@@ -2,8 +2,8 @@
 
 .orb-wrap {
   position: relative;
-  width: 230px;
-  height: 230px;
+  width: 290px;
+  height: 290px;
 }
 
 .orb-wrap.small {
@@ -15,12 +15,7 @@
   position: absolute;
   inset: 0;
   border-radius: 9999px;
-  background: conic-gradient(
-    from 0deg,
-    var(--state-color),
-    color-mix(in srgb, var(--state-color) 30%, white),
-    var(--state-color)
-  );
+  background: conic-gradient(from 145deg, #f8c2a3, #ee8440 52%, #f5ae7f 82%, #f8c2a3);
   animation: spin 7s linear infinite;
   box-shadow: 0 0 90px -6px var(--state-soft), inset 0 0 40px rgba(255, 255, 255, 0.3);
 }
@@ -38,6 +33,11 @@
   pointer-events: none;
 }
 
+.orb-label {
+  letter-spacing: 0.12em;
+  font-weight: 500;
+}
+
 .orb-ring {
   position: absolute;
   inset: -14px;
@@ -53,6 +53,27 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.hero-orb-stage {
+  min-height: 390px;
+}
+
+.hero-orb-wrap {
+  width: 290px;
+  height: 290px;
+}
+
+.hero-verdict {
+  top: 30px;
+  right: -40px;
+  min-width: 105px;
+}
+
+.hero-scheme {
+  bottom: 22px;
+  left: -62px;
+  min-width: 208px;
 }
 
 @keyframes spin {
@@ -77,5 +98,34 @@
   .orb-core,
   .orb-ring {
     animation: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-orb-stage {
+    min-height: 340px;
+  }
+
+  .hero-orb-wrap {
+    transform: scale(0.86);
+  }
+
+  .hero-verdict {
+    top: 18px;
+    right: -28px;
+  }
+
+  .hero-scheme {
+    bottom: 8px;
+    left: -34px;
+  }
+
+  .orb-wrap {
+    width: 250px;
+    height: 250px;
+  }
+
+  .orb-ring {
+    inset: -12px;
   }
 }

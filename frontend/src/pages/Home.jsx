@@ -1,6 +1,5 @@
 // Landing page with hero, problem section, features, CTA
 import ScoreOrb from '../components/ScoreOrb'
-import VerdictBadge from '../components/VerdictBadge'
 import ConfidenceTag from '../components/ConfidenceTag'
 
 export default function Home() {
@@ -39,20 +38,20 @@ export default function Home() {
             </div>
 
             {/* Right: ScoreOrb with callouts */}
-            <div className="flex justify-center items-center relative reveal">
-              <div className="relative">
+            <div className="hero-orb-stage flex justify-center items-center relative reveal">
+              <div className="hero-orb-wrap relative">
                 <ScoreOrb score={78} state="go" size="large" />
                 
                 {/* Verdict callout */}
-                <div className="absolute top-12 right-0 translate-x-24 bg-white border-2 border-ink/15 rounded-2xl px-4 py-3 shadow-lg">
-                  <p className="text-xs text-inkSoft font-mono mb-1">Verdict</p>
-                  <VerdictBadge verdict="GO" />
+                <div className="hero-verdict absolute bg-beige border-2 border-ink rounded-2xl px-5 py-4 shadow-lg">
+                  <p className="text-sm text-inkSoft font-mono mb-1">Verdict</p>
+                  <p className="text-xl font-bold text-go"><span className="mr-2">✅</span>GO</p>
                 </div>
 
                 {/* Scheme callout */}
-                <div className="absolute bottom-12 right-0 translate-x-32 bg-white border-2 border-ink/15 rounded-2xl px-4 py-3 shadow-lg">
-                  <p className="text-xs text-inkSoft font-mono mb-1">Scheme matched</p>
-                  <p className="text-sm font-bold text-ink">NSFDC · Term Loan</p>
+                <div className="hero-scheme absolute bg-beige border-2 border-ink rounded-2xl px-5 py-4 shadow-lg">
+                  <p className="text-sm text-inkSoft font-mono mb-1">Scheme matched</p>
+                  <p className="text-lg font-bold text-ink whitespace-nowrap">NSFDC · Term Loan</p>
                 </div>
               </div>
             </div>
