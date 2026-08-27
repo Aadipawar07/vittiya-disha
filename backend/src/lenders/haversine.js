@@ -1,0 +1,1 @@
+export function haversineDistanceKm(from, to) { const radians = (value) => value * Math.PI / 180; const dLat = radians(to.latitude - from.latitude); const dLon = radians(to.longitude - from.longitude); const a = Math.sin(dLat / 2) ** 2 + Math.cos(radians(from.latitude)) * Math.cos(radians(to.latitude)) * Math.sin(dLon / 2) ** 2; return 6371 * 2 * Math.asin(Math.sqrt(a)) }

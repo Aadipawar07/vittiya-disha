@@ -28,6 +28,17 @@ The default server is `http://localhost:5000`. Copy `.env.example` to `.env` to 
 
 The response contains `recommendation.scheme_code`, status, auditable rule results, financial calculations, estimated EMI metadata, alternatives, an audit object, and a final-approval disclaimer. `ELIGIBLE` means the supplied deterministic conditions passed; it is never a guarantee of government approval. Missing required facts produce `NEEDS_VERIFICATION`, while contradictory known facts produce `NOT_ELIGIBLE`.
 
+Additional endpoints:
+
+- `POST /api/financial/calculate` calculates financing for a known project cost and scheme.
+- `POST /api/financial/estimate` estimates business setup cost, then calculates financing.
+- `POST /api/business/estimate` returns deterministic low/base/high setup scenarios and component provenance.
+- `GET /api/financial/scheme/:schemeId` returns the versioned financial configuration.
+- `GET /api/lenders?district=Jalgaon&schemeId=NSFDC_TERM_LOAN` returns matching directory partners. Charges unavailable in the source remain `null`.
+- `POST /api/assessment/financial-recommendation` composes the existing scheme router, cost estimator, financial engine, and lender matcher.
+
+Financial responses distinguish `schemeFinancingCapacity`, `schemeMaximumLoan`, `eligibleLoan`, `beneficiaryContribution`, `userContribution`, `fundingGap`, and contribution surplus/shortfall. EMI is returned only for a fixed configured rate and is always marked as an estimate. Rate ranges are returned without inventing a scenario rate.
+
 ## Architecture
 
 `SchemeRepository` reads the configuration registry. `SchemeEngine` evaluates generic structured rules, computes financial terms, and delegates deterministic ranking to `ranking-engine.js`. The 17 scheme definitions live under `src/schemes/{nbcfdc,nsfdc,nskfdc}` and can later be replaced by a PostgreSQL repository without changing the engine contract.
