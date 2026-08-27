@@ -8,7 +8,7 @@ export function calculateFinancialRecommendation(input) {
   if (!rules) throw Object.assign(new Error('Unknown financial scheme'), { statusCode: 400, code: 'UNKNOWN_SCHEME' })
   const marginPercentage = rules.financing.beneficiaryMargin
   const projectCost = Number(input.projectCost ?? input.business?.projectCost ?? input.requirement?.project_cost ?? (input.marginCapital === undefined ? 0 : projectCostFromMargin(Number(input.marginCapital), marginPercentage)))
-  const requestedLoan = input.requestedLoan ?? input.financial?.requestedLoan ?? input.requirement?.loan_required
+  const requestedLoan = input.requestedLoan ?? input.financial?.requestedLoan ?? input.requirement?.loan_required ?? (projectCost - Number(input.ownContribution ?? input.financial?.ownContribution ?? input.requirement?.own_contribution ?? 0) - Number(input.otherFunding ?? input.financial?.otherFunding ?? 0))
   const otherFunding = Number(input.otherFunding ?? input.financial?.otherFunding ?? 0)
   const loanPercentage = rules.financing.corporationShare
   const financingCapacity = calculateFinancing(projectCost, loanPercentage)

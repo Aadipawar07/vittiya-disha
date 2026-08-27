@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './pages/Home'
 import BusinessInput from './pages/BusinessInput'
+import FinancialAssessment from './pages/FinancialAssessment'
 import Analysis from './pages/Analysis'
 import Schemes from './pages/Schemes'
 import Financial from './pages/Financial'
@@ -24,8 +25,8 @@ function AppContent() {
       <main className="pt-20">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/assess" element={<BusinessInput />} />
-          <Route path="/start-assessment" element={<BusinessInput />} />
+          <Route path="/assess" element={<FinancialAssessment />} />
+          <Route path="/start-assessment" element={<FinancialAssessment />} />
           <Route path="/analysis" element={<Analysis />} />
           <Route path="/schemes" element={<Schemes />} />
           <Route path="/scheme-results/:schemeCode" element={<SchemeResults />} />

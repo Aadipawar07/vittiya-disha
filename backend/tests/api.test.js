@@ -49,3 +49,11 @@ test('composite financial recommendation adapts frontend business payload', () =
   assert.equal(body.data.business.estimatedProjectCost, 800000)
   assert.equal(body.data.financing.eligibleLoan, 680000)
 }))
+
+test('composite estimator includes nested frontend rent fields', () => withServer(async (base) => {
+  const response = await fetch(`${base}/api/assessment/financial-recommendation`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ corporation: 'NSFDC', profile: { category: 'SC', annual_family_income: 250000, district: 'Jalgaon' }, requirement: { purpose: 'small_business' }, business: { businessType: 'grocery_shop', locationType: 'rented_shop', property: { monthlyRent: 12000, securityDepositMonths: 3 }, inventory: { amount: 200000 } }, financial: { ownContribution: 100000, otherFunding: 0 } }) })
+  const body = await response.json()
+  assert.equal(response.status, 200)
+  assert.equal(body.data.business.breakdown.rent_deposit.amount, 36000)
+  assert.equal(body.data.business.estimatedProjectCost, 311000)
+}))
