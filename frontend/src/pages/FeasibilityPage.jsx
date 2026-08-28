@@ -350,10 +350,16 @@ export default function FeasibilityPage() {
         pincode: loc.pincode ?? null
       },
       financial: {
-        projectRequirement: Number(financial.requestedAmount ?? assessmentFinancial?.requestedLoan ?? 0),
-        eligibleLoan: Number(assessmentFinancial?.eligible_loan ?? assessmentFinancial?.eligibleLoan ?? 0),
-        ownContribution: Number(financial.ownContribution ?? 0),
-        expectedMonthlyIncome: Number(financial.expectedMonthlyIncome ?? 0),
+        projectRequirement: Number(financial.requestedAmount) || Number(assessmentFinancial?.requestedLoan) || 0,
+        eligibleLoan: Number(assessmentFinancial?.eligible_loan) || Number(assessmentFinancial?.eligibleLoan) || 0,
+        ownContribution: Number(financial.ownContribution) || 0,
+        // Use || (not ??) so empty strings are treated as 0
+        // Fallback chain: assessment context → assessmentResult financial → assessmentResult top-level
+        expectedMonthlyIncome:
+          Number(financial.expectedMonthlyIncome) ||
+          Number(assessmentResult?.financial?.expectedMonthlyIncome) ||
+          Number(assessmentResult?.expectedMonthlyIncome) ||
+          0,
         singleBuyerDependency: financial.singleBuyerDependency ?? null
       },
       userInputs: {
@@ -392,12 +398,23 @@ export default function FeasibilityPage() {
   }
 
   useEffect(() => {
-    // Use cached result if already fetched (e.g. user navigates back)
     if (feasibilityResult && !hasFetched.current) {
-      setResult(feasibilityResult)
-      setUiState('SUCCESS')
-      hasFetched.current = true
-      return
+      // Detect a stale cached result: repaymentStress is unavailable but the user
+      // clearly entered an expectedMonthlyIncome. This means the previous fetch
+      // sent income=0 due to the now-fixed ?? vs || bug. Force a fresh fetch.
+      const cachedStressBroken =
+        feasibilityResult.repaymentStress?.status === 'INSUFFICIENT_DATA' &&
+        (Number(assessment?.financial?.expectedMonthlyIncome) > 0 ||
+         Number(feasibilityResult.userFinancialInputs?.expectedMonthlyIncome) > 0)
+
+      if (!cachedStressBroken) {
+        // Cache is valid — use it
+        setResult(feasibilityResult)
+        setUiState('SUCCESS')
+        hasFetched.current = true
+        return
+      }
+      // Cache is stale — fall through to load() below
     }
     if (!hasFetched.current) {
       hasFetched.current = true

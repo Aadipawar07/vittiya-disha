@@ -11,7 +11,7 @@ describe('RepaymentStressEngine Unit Tests', () => {
       monthlyEMI: 8000
     })
 
-    assert.equal(res.status, 'CALCULATED')
+    assert.equal(res.status, 'AVAILABLE')
     assert.equal(res.monthlyEMI, 8000)
     assert.equal(res.baseMonthlyIncome, 30000)
 
@@ -61,7 +61,7 @@ describe('RepaymentStressEngine Unit Tests', () => {
       monthlyEMI: 12000
     })
 
-    assert.equal(res.status, 'CALCULATED')
+    assert.equal(res.status, 'AVAILABLE')
     assert.equal(res.baseRatioPercent, 60.0)
     assert.equal(res.overallVerdict, STRESS_VERDICTS.HIGH_RISK)
 
@@ -91,7 +91,7 @@ describe('RepaymentStressEngine Unit Tests', () => {
       monthlyEMI: 7000
     })
 
-    assert.equal(res.status, 'CALCULATED')
+    assert.equal(res.status, 'AVAILABLE')
     // Expected: 7000 / 50000 = 14.0%
     assert.equal(res.baseRatioPercent, 14.0)
     assert.equal(res.overallVerdict, STRESS_VERDICTS.COMFORTABLE)

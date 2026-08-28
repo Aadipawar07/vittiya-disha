@@ -44,7 +44,7 @@ router.post('/analyze', async (req, res, next) => {
     const ownContribution = Number(finInput.ownContribution) || Math.round(projectReq * 0.1)
     const schemeFinancingPercent = projectReq > 0 ? Math.round((eligibleLoan / projectReq) * 100) : 90
 
-    const monthlyIncome = Number(finInput.expectedMonthlyIncome || finInput.monthlyIncome || 0)
+    const monthlyIncome = Number(finInput.expectedMonthlyIncome) || Number(finInput.monthlyIncome) || Number(req.body.expectedMonthlyIncome) || Number(req.body.monthlyIncome) || 0
     const interestRate = Number(finInput.annualInterestRate || 8.0)
     const tenureMonths = Number(finInput.tenureMonths || 60)
 
@@ -61,7 +61,7 @@ router.post('/analyze', async (req, res, next) => {
 
     // Financial Fit Score: combination of financing coverage and debt repayment feasibility
     let baseFinScore = Math.round(schemeFinancingPercent * 0.95)
-    if (stressResult.status === 'CALCULATED') {
+    if (stressResult.status === 'AVAILABLE' || stressResult.status === 'CALCULATED') {
       if (stressResult.overallVerdict === 'COMFORTABLE') baseFinScore = Math.min(95, baseFinScore + 5)
       else if (stressResult.overallVerdict === 'TIGHT') baseFinScore = Math.max(50, baseFinScore - 10)
       else if (stressResult.overallVerdict === 'HIGH_RISK') baseFinScore = Math.max(40, baseFinScore - 20)
@@ -142,6 +142,13 @@ router.post('/analyze', async (req, res, next) => {
       warning,
       location: market.location,
       marketRadiusKm: 10,
+      // Echo back user-provided financial inputs so the frontend can recover them from the cached response
+      userFinancialInputs: {
+        expectedMonthlyIncome: monthlyIncome,
+        projectRequirement: projectReq,
+        eligibleLoan,
+        ownContribution
+      },
       components: {
         demandFit: {
           score: demandScore,

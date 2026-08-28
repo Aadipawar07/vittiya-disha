@@ -126,7 +126,7 @@ export class RepaymentStressEngine {
     }
 
     return {
-      status: 'CALCULATED',
+      status: 'AVAILABLE',
       monthlyEMI: emi,
       principal,
       annualInterestRate: rate,

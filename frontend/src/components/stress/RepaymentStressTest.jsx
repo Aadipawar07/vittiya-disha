@@ -39,7 +39,9 @@ export default function RepaymentStressTest({ repaymentStress = {}, financialCon
   } = repaymentStress
 
   // Missing / Zero Income State
-  if (status === 'INSUFFICIENT_DATA' || !baseMonthlyIncome || baseMonthlyIncome <= 0) {
+  const isAvailable = (status === 'AVAILABLE' || status === 'CALCULATED') && baseMonthlyIncome > 0 && scenarios.length > 0
+
+  if (!isAvailable) {
     return (
       <section className="result-section" id="repayment-stress-test">
         <div className="flex items-center gap-3 mb-4">
@@ -56,7 +58,7 @@ export default function RepaymentStressTest({ repaymentStress = {}, financialCon
             Repayment stress test unavailable
           </p>
           <p className="text-xs text-inkSoft mt-1 max-w-md mx-auto">
-            Provide an expected monthly business income in your assessment to test how loan repayments behave under changing revenue conditions.
+            Add an expected monthly business income in your assessment to see how repayment behaves under different income scenarios.
           </p>
         </div>
       </section>
