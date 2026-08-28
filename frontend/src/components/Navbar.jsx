@@ -10,14 +10,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3">
-          <span
-            className="w-10 h-10 rounded-full flex items-center justify-center"
-            style={{
-              background: 'conic-gradient(from 0deg,#E8762C,#C6961D,#E8762C)'
-            }}
-          >
-            <span className="font-display text-xs font-bold text-beige">VD</span>
-          </span>
+          <img
+            src="/logo.jpeg"
+            alt="Vittiya Disha"
+            className="w-12 h-12 object-contain"
+          />
           <span className="font-display text-xl font-semibold tracking-tight">
             Vittiya <em className="not-italic text-saffron">Disha</em>
           </span>

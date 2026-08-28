@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: vittiya-disha-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: yarn install
+    startCommand: yarn start
+    healthCheckPath: /health

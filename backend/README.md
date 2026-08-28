@@ -6,11 +6,22 @@ Deterministic, auditable scheme recommendation API for NBCFDC, NSFDC, and NSKFDC
 
 ```powershell
 cd backend
-npm install
-npm run dev
+yarn install
+yarn dev
 ```
 
 The default server is `http://localhost:5000`. Copy `.env.example` to `.env` to configure the port, CORS origin, or optional Nemotron-compatible endpoint.
+
+## Deploy on Render
+
+Create a **Web Service** with these settings:
+
+- Root directory: `backend`
+- Runtime: `Node`
+- Build command: `yarn install`
+- Start command: `yarn start`
+
+Add `CORS_ORIGIN` as an environment variable containing the deployed frontend URL. Render provides `PORT` automatically, and the backend health check is available at `/health`.
 
 ## API
 
